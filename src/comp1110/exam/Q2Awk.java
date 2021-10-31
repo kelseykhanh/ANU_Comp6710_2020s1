@@ -4,6 +4,10 @@ import java.io.IOException;
 
 /**
  * COMP1110 Exam, Question 2
+ *
+ * IMPORTANT NOTE:  This question depends on knowledge of Java NIO, which is not
+ * taught in S2 classes.  It can be solved without NIO, but is not intended for
+ * students who are not familiar with NIO.
  */
 public class Q2Awk {
     /**
