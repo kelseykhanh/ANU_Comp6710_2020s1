@@ -53,6 +53,21 @@ public class Q1FamilyTree {
      */
     public static String getAncestry(Individual ancestor, String targetName) {
         // FIXME complete this method
-        return "";
+
+        //if the target name matches the ancestor name
+        if (ancestor.name.equals(targetName)){
+            return targetName;
+        }
+        if(ancestor.children != null){
+            for (Individual child : ancestor.children){
+                String result = getAncestry(child, targetName);
+                if (result != null) {
+                    // If the target is found, append the current ancestor's name
+                    return result + " born of " + ancestor.name;
+                }
+            }
+        }
+        return null;
+
     }
 }

@@ -1,5 +1,9 @@
 package comp1110.exam;
 
+import java.util.ArrayList;
+import java.io.*;
+import java.util.List;
+
 /**
  * COMP1110 Exam, Question 1.1
  */
@@ -19,6 +23,33 @@ public class Q1Factors {
      */
     public static int[] factors(int n) {
         // FIXME complete this method
-        return null;
+
+        if (n<2) {
+            return new int[0];
+        }
+
+        List<Integer> factorList = new ArrayList<>();
+
+        // Start with the smallest prime factor
+        for (int i = 2; i*i <= n; i++ ){
+            while (n % i == 0 ){                 // check if n is divisible by i then repeating
+                factorList.add(i);
+                n /= i;                          // the result of n/i go back to the loop
+            }
+        }
+        if (n > 1){                              // if the last result is still > 1 then itself is a prime factor
+            factorList.add(n);
+        }
+
+        //Convert the ArrayList into Array
+        int[] factorArray = new int[factorList.size()];
+
+        for (int i = 0; i < factorList.size(); i++){
+            factorArray[i] = factorList.get(i);
+        }
+        return factorArray;
+
     }
 }
+
+
