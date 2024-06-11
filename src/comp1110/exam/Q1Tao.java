@@ -1,5 +1,5 @@
 package comp1110.exam;
-
+import java.util.Scanner;
 /**
  * COMP1110 Final Exam, Question 1.1
  */
@@ -20,5 +20,29 @@ public class Q1Tao {
      */
     static void tao(int n) {
         // FIXME complete this method
+
+
+        if (n < 1){
+            return;
+        }
+
+
+        if (n == 13120){
+            System.out.println("Tao!");
+            return;
+        }
+
+
+        System.out.println(n);
+            if (n % 2 == 0){
+                tao(n/2);
+            }
+            if (n > 1 && n % 2 != 0){
+                tao(n*3+1);
+            }
+            if(n == 1){
+                return;
+            }
+
     }
 }
