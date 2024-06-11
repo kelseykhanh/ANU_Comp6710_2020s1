@@ -1,5 +1,8 @@
 package comp1110.exam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * COMP1110 Exam, Question 1.2
  */
@@ -32,6 +35,25 @@ public class Q1Rain {
      */
     public static int avg(int[] in) {
         // FIXME complete this method
-        return 0;
+
+
+        int sumIncluded = 0;
+        int countIncluded = 0;
+
+        for (int i = 0; i < in.length; i++) {
+            if (in[i] == MAGIC) {
+                break;
+            }
+            if (in[i] >= 0) {
+                sumIncluded += in[i];
+                countIncluded++;
+            }
+        }
+
+        if (countIncluded == 0) {
+                return -1;
+            }
+        return sumIncluded / countIncluded;
+
+        }
     }
-}
