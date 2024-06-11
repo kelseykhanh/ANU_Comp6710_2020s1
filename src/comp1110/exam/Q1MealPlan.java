@@ -1,5 +1,7 @@
 package comp1110.exam;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +27,7 @@ public class Q1MealPlan {
 
         @Override
         public String toString() {
+
             return dish + " (" + meal.name().toLowerCase() + ")";
         }
     }
@@ -67,6 +70,51 @@ public class Q1MealPlan {
      */
     public static Set<List<Food>> getAllMealPlans(Set<Food> foods, int numMeals) {
         // FIXME complete this method
-        return null;
+
+        Set<List<Food>> mealPlan = new HashSet<>();
+
+        if (foods == null || foods.size() < numMeals || numMeals <= 0){
+            return mealPlan;
+        }
+
+        List<Food> foodList = new ArrayList<>(foods);
+        backtrack(mealPlan, new ArrayList<>(), foodList, numMeals);
+        return mealPlan;
     }
+
+    private static void backtrack(Set<List<Food>> mealPlan, List<Food> currentPlan, List<Food> foods, int numMeals){
+        if (currentPlan.size() == numMeals){
+            mealPlan.add(new ArrayList<>(currentPlan));
+            return;
+        }
+
+        for (Food f : foods){
+            if (currentPlan.isEmpty() || canFollow(currentPlan.get(currentPlan.size()-1), f)){
+                currentPlan.add(f);
+                List<Food> remainingFoods = new ArrayList<>(foods);
+                remainingFoods.remove(f);
+                backtrack(mealPlan, currentPlan, remainingFoods, numMeals);
+                currentPlan.remove(currentPlan.size() - 1);
+            }
+
+        }
+
+    }
+
+    private static boolean canFollow(Food lastFood, Food nextFood){
+        switch(lastFood.meal){
+            case BREAKFAST:
+                return nextFood.meal == Meal.LUNCH;
+            case LUNCH:
+                return nextFood.meal == Meal.DINNER;
+            case DINNER:
+                return nextFood.meal == Meal.DESSERT;
+            case DESSERT:
+                return nextFood.meal == Meal.BREAKFAST;
+            default:
+                return false;
+        }
+
+    }
+
 }
